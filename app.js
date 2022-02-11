@@ -1,3 +1,5 @@
-function computerPlay {
-    var choice = Math.floor((Math.random() * 5) + 1);
+function computerPlay () {
+    var pick = Math.floor((Math.random() * 5) + 1) - 1;
+    const choices = ["Rock", "Paper", "Scissors", "Lizzard", "Spock"];
+    return choices[pick];
 }
