@@ -8,6 +8,45 @@
  * Potential Additional Features:
  * -  Different messages for winning or losing.
  */
+/*
+    rock:
+    - crushes lizard
+    - crushes scissors
+    paper:
+    - covers rock
+    - disproves spock
+    scissors: 
+    - decapitates lizard
+    - cuts paper
+    lizard:
+    - poisons spock
+    - eats paper
+    spock:
+    - smashes scissors
+    - vaporizes rock
+    */
+ var messages = {
+    "rock":{
+        "lizzard": "Rock crushes lizzard.",
+        "scissor": "Rock crushes scissors"
+    },
+    "paper":{
+        "rock": "Paper covers rock.",
+        "spock": "Paper disproves Spock."
+    },
+    "scissors":{
+        "lizzard": "Scissors decapitates lizzard.",
+        "paper": "Scissors cuts paper."
+    },
+    "lizzard":{
+        "spock": "Lizzard poisons Spock.",
+        "paper": "Lizzard eats paper."
+    },
+    "spock":{
+        "scissors": "Spock smashes scissors.",
+        "rock": "Spock vaporizes rock."
+    }
+};
 
 /**
  * Randomly chooses a pick for the "computer".
@@ -26,18 +65,11 @@ function computerPlay () {
  * @return {String}                   result of the round
  */
 function playRound(playerSelection, computerSelection){
-    var strengths = {
-        "rock": ["lizzard", "scissors"],
-        "paper": ["rock", "spock"],
-        "scissors": ["lizzard", "paper"],
-        "lizzard": ["spock", "paper"],
-        "spock": ["scissors", "rock"]
-    };
     let playerPick = playerSelection.toLowerCase();
     console.log(playerPick);
     console.log(computerSelection);
     var message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
-    if (strengths[playerPick].includes(computerSelection)){
+    if (computerSelection in messages[playerPick]){
         message += winningMessage(playerPick, computerSelection) + " " + "You Win!";
     } else if (playerPick == computerSelection){
         message += "Draw!";
@@ -54,45 +86,6 @@ function playRound(playerSelection, computerSelection){
  * @return {String}             result message
  */
 function winningMessage (winPick, losePick){
-    /*
-    rock:
-    - crushes lizard
-    - crushes scissors
-    paper:
-    - covers rock
-    - disproves spock
-    scissors: 
-    - decapitates lizard
-    - cuts paper
-    lizard:
-    - poisons spock
-    - eats paper
-    spock:
-    - smashes scissors
-    - vaporizes rock
-    */
-    var messages = {
-        "rock":{
-            "lizzard": "Rock crushes lizzard.",
-            "scissor": "Rock crushes scissors"
-        },
-        "paper":{
-            "rock": "Paper covers rock.",
-            "spock": "Paper disproves Spock."
-        },
-        "scissors":{
-            "lizzard": "Scissors decapitates lizzard.",
-            "paper": "Scissors cuts paper."
-        },
-        "lizzard":{
-            "spock": "Lizzard poisons Spock.",
-            "paper": "Lizzard eats paper."
-        },
-        "spock":{
-            "scissors": "Spock smashes scissors.",
-            "rock": "Spock vaporizes rock."
-        }
-    };
     return messages[winPick][losePick];
 }
 
