@@ -7,6 +7,7 @@
  * - implement error checking, but may not need because future GUI will input the players choice by user clicking on image representing their pick.
  * Potential Additional Features:
  * -  Different messages for winning or losing.
+ * -  Let user input desired rounds
  */
 /*
     rock:
