@@ -1,6 +1,6 @@
+"use strict";
 /**
  * TODO: Make sure the type for total_rounds is correct => ints in javascript?
- * - Also look into when I should be using var, let, and const
  * -  Finish helper function for custom winning message based on result.
  *   Can do like rock beats scissors, but for win or lose you append You Win! or Too Bad in front of helper's return value
  * -  write tests
@@ -66,7 +66,7 @@ function computerPlay () {
  * @return {String}                   result of the round
  */
 function playRound(playerSelection, computerSelection){
-    let playerPick = playerSelection.toLowerCase();
+    var playerPick = playerSelection.toLowerCase();
     console.log(playerPick);
     console.log(computerSelection);
     var message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
