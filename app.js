@@ -4,7 +4,7 @@
  * -  Finish helper function for custom winning message based on result.
  *   Can do like rock beats scissors, but for win or lose you append You Win! or Too Bad in front of helper's return value
  * -  write tests
- * - implement error checking, but doesn't have to be too extensive because future GUI will input the players choice
+ * - implement error checking, but may not need because future GUI will input the players choice by user clicking on image representing their pick.
  * Potential Additional Features:
  * -  Different messages for winning or losing.
  */
@@ -69,11 +69,11 @@ function playRound(playerSelection, computerSelection){
     console.log(playerPick);
     console.log(computerSelection);
     var message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
-    if (computerSelection in messages[playerPick]){
+    if (computerSelection in messages[playerPick]){ // player wins
         message += winningMessage(playerPick, computerSelection) + " " + "You Win!";
-    } else if (playerPick == computerSelection){
+    } else if (playerPick == computerSelection){ // draw
         message += "Draw!";
-    } else {
+    } else { //computer wins
         message += winningMessage(computerSelection, playerPick) + " " + "Better Luck Next Time!";
     }
     return message;
@@ -81,9 +81,9 @@ function playRound(playerSelection, computerSelection){
 
 /**
  * Returns message based on the choices of the two players. 
- * @param  {String} player1Pick player 1's pick
- * @param  {String} player2Pick player 2's pick
- * @return {String}             result message
+ * @param  {String} winPick  winner's pick
+ * @param  {String} losePick loser's pick
+ * @return {String}          result message
  */
 function winningMessage (winPick, losePick){
     return messages[winPick][losePick];
