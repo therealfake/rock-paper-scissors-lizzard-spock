@@ -2,34 +2,17 @@
 /**
  * TODO: Make sure the type for total_rounds is correct => ints in javascript?
  * -  Finish helper function for custom winning message based on result.
- *   Can do like rock beats scissors, but for win or lose you append You Win! or Too Bad in front of helper's return value
+ *    Can do like rock beats scissors, but for win or lose you append You Win! or Too Bad in front of helper's return value
  * -  write tests
  * - implement error checking, but may not need because future GUI will input the players choice by user clicking on image representing their pick.
  * Potential Additional Features:
  * -  Different messages for winning or losing.
  * -  Let user input desired rounds
  */
-/*
-    rock:
-    - crushes lizard
-    - crushes scissors
-    paper:
-    - covers rock
-    - disproves spock
-    scissors: 
-    - decapitates lizard
-    - cuts paper
-    lizard:
-    - poisons spock
-    - eats paper
-    spock:
-    - smashes scissors
-    - vaporizes rock
-    */
- var messages = {
+ const messages = {
     "rock":{
         "lizzard": "Rock crushes lizzard.",
-        "scissor": "Rock crushes scissors"
+        "scissors": "Rock crushes scissors"
     },
     "paper":{
         "rock": "Paper covers rock.",
@@ -54,7 +37,7 @@
  * @return {string}      computer's choice
  */
 function computerPlay () {
-    var pick = Math.floor((Math.random() * 5) + 1) - 1;
+    let pick = Math.floor((Math.random() * 5) + 1) - 1;
     const choices = ["rock", "paper", "scissors", "lizzard", "spock"];
     return choices[pick];
 }
@@ -66,10 +49,9 @@ function computerPlay () {
  * @return {String}                   result of the round
  */
 function playRound(playerSelection, computerSelection){
-    var playerPick = playerSelection.toLowerCase();
-    console.log(playerPick);
-    console.log(computerSelection);
-    var message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
+    let playerPick = playerSelection.toLowerCase();
+    let message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
+
     if (computerSelection in messages[playerPick]){ // player wins
         message += winningMessage(playerPick, computerSelection) + " " + "You Win!";
     } else if (playerPick == computerSelection){ // draw
@@ -99,6 +81,12 @@ function winningMessage (winPick, losePick){
 function game(total_rounds) {
     for (let i = 0; i < total_rounds; i++) {
         let playerPick = prompt("What do you pick?"); //Take care of when it's null
+
+        // handle invalid input
+        while (!(playerPick in messages)) {
+            playerPick = prompt("Invalid Input. Please enter Rock, Paper, Scissors, Lizzard, or Spock");
+        }
+
         console.log(playRound(playerPick,computerPlay()));
     }
 }
