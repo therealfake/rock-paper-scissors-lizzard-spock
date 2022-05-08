@@ -86,10 +86,20 @@ function playRound(playerSelection){
  */
 function game(playerSelection) {
     if (Math.max(playerScore, computerScore) <= 4){
+        let resultScore = document.getElementById('result-score');
+
         console.log(playRound(playerSelection));
+        resultScore.innerHTML = "You: " + playerScore + " Computer: " + computerScore;
+    } else {
+        let resultMessage = document.getElementById('result-message');
+
+        if (computerScore == 5) {
+            resultMessage.innerHTML = "Computer Wins Muahuahuahua";
+        } else {
+            resultMessage.innerHTML = "You beat the computer! Congrats!";
+        }
     }
-    console.log(playerScore);
-    console.log(computerScore);
+    console.log(playerScore,computerScore);
 }
 
 playerButtons.forEach(button => {
