@@ -9,7 +9,11 @@
  * -  Different messages for winning or losing.
  * -  Let user input desired rounds
  */
- const messages = {
+let playerScore = 0;
+let computerScore = 0;
+
+const playerButtons = document.querySelectorAll('button');
+const messages = {
     "rock":{
         "lizzard": "Rock crushes lizzard.",
         "scissors": "Rock crushes scissors"
@@ -53,10 +57,12 @@ function playRound(playerSelection, computerSelection){
     let message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
 
     if (computerSelection in messages[playerPick]){ // player wins
+        playerScore += 1;
         message += winningMessage(playerPick, computerSelection) + " " + "You Win!";
     } else if (playerPick == computerSelection){ // draw
         message += "Draw!";
     } else { //computer wins
+        computerScore += 1;
         message += winningMessage(computerSelection, playerPick) + " " + "Better Luck Next Time!";
     }
     return message;
@@ -90,6 +96,14 @@ function game(total_rounds) {
         console.log(playRound(playerPick,computerPlay()));
     }
 }
-//let playerGames = prompt("How many rounds do you want to play?");
-//game (playerGames);
-game(5);
+
+playerButtons.forEach((button => {
+    button.addEventListener('click', () => {
+        if (playerScore + computerScore <= 5){
+            console.log(playRound(button.id, computerPlay()));
+        }
+        console.log(playerScore);
+        console.log(computerScore);
+    })
+}))
+
