@@ -79,13 +79,28 @@ function playRound(playerSelection){
     return message;
 }
 
-playerButtons.forEach((button => {
-    button.addEventListener('click', () => {
-        if (Math.max(playerScore, computerScore) <= 4){
-            console.log(playRound(button.id));
-        }
-        console.log(playerScore);
-        console.log(computerScore);
-    })
-}))
+/**
+ * Plays the game between player and computer. Handles specific message depending on score in the the game.
+ * @param  {String} playerSelection   player's choice
+ * @return {String}                   result of current stage in the game
+ */
+function game(playerSelection) {
+    if (Math.max(playerScore, computerScore) <= 4){
+        console.log(playRound(playerSelection));
+    }
+    console.log(playerScore);
+    console.log(computerScore);
+}
+
+playerButtons.forEach(button => {
+    if (button.id != "reset"){
+        button.addEventListener('click', () => {game(button.id)});  
+    } else {
+        button.addEventListener('click', () => {
+            playerScore = 0;
+            computerScore = 0;
+        }); 
+    }
+    
+})
 
