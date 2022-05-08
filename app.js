@@ -13,6 +13,7 @@ let playerScore = 0;
 let computerScore = 0;
 
 const playerButtons = document.querySelectorAll('button');
+
 const messages = {
     "rock":{
         "lizzard": "Rock crushes lizzard.",
@@ -47,41 +48,41 @@ function computerPlay () {
 }
 
 /**
- * Plays a single round between player and computer.
- * @param  {String} playerSelection   player's choice
- * @param  {String} computerSelection computer's choice
- * @return {String}                   result of the round
- */
-function playRound(playerSelection, computerSelection){
-    let playerPick = playerSelection.toLowerCase();
-    let message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
-
-    if (computerSelection in messages[playerPick]){ // player wins
-        playerScore += 1;
-        message += winningMessage(playerPick, computerSelection) + " " + "You Win!";
-    } else if (playerPick == computerSelection){ // draw
-        message += "Draw!";
-    } else { //computer wins
-        computerScore += 1;
-        message += winningMessage(computerSelection, playerPick) + " " + "Better Luck Next Time!";
-    }
-    return message;
-}
-
-/**
  * Returns message based on the choices of the two players. 
  * @param  {String} winPick  winner's pick
  * @param  {String} losePick loser's pick
  * @return {String}          result message
  */
-function winningMessage (winPick, losePick){
+ function winningMessage (winPick, losePick){
     return messages[winPick][losePick];
+}
+
+/**
+ * Plays a single round between player and computer.
+ * @param  {String} playerSelection   player's choice
+ * @return {String}                   result of the round
+ */
+function playRound(playerSelection){
+    let playerPick = playerSelection;
+    let computerSelection = computerPlay();
+    let message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
+
+    if (computerSelection in messages[playerPick]){ // player wins
+        playerScore += 1;
+        message += winningMessage(playerPick, computerSelection);
+    } else if (playerPick == computerSelection){ // draw
+        message += "Draw!";
+    } else { //computer wins
+        computerScore += 1;
+        message += winningMessage(computerSelection, playerPick);
+    }
+    return message;
 }
 
 playerButtons.forEach((button => {
     button.addEventListener('click', () => {
-        if (playerScore + computerScore <= 5){
-            console.log(playRound(button.id, computerPlay()));
+        if (Math.max(playerScore, computerScore) <= 4){
+            console.log(playRound(button.id));
         }
         console.log(playerScore);
         console.log(computerScore);
