@@ -78,25 +78,6 @@ function winningMessage (winPick, losePick){
     return messages[winPick][losePick];
 }
 
-/**
- * Plays total_rounds rounds between player and computer. 
- * @param  {Number} total_rounds number of rounds playable
- * @return {String}              result of the each round
- */
-
-function game(total_rounds) {
-    for (let i = 0; i < total_rounds; i++) {
-        let playerPick = prompt("What do you pick?"); //Take care of when it's null
-
-        // handle invalid input
-        while (!(playerPick in messages)) {
-            playerPick = prompt("Invalid Input. Please enter Rock, Paper, Scissors, Lizzard, or Spock");
-        }
-
-        console.log(playRound(playerPick,computerPlay()));
-    }
-}
-
 playerButtons.forEach((button => {
     button.addEventListener('click', () => {
         if (playerScore + computerScore <= 5){
