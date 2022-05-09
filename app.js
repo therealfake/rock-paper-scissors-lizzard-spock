@@ -1,35 +1,13 @@
 "use strict";
-/**
- * TODO: Make sure the type for total_rounds is correct => ints in javascript?
- * -  Finish helper function for custom winning message based on result.
- *   Can do like rock beats scissors, but for win or lose you append You Win! or Too Bad in front of helper's return value
- * -  write tests
- * - implement error checking, but may not need because future GUI will input the players choice by user clicking on image representing their pick.
- * Potential Additional Features:
- * -  Different messages for winning or losing.
- * -  Let user input desired rounds
- */
-/*
-    rock:
-    - crushes lizard
-    - crushes scissors
-    paper:
-    - covers rock
-    - disproves spock
-    scissors: 
-    - decapitates lizard
-    - cuts paper
-    lizard:
-    - poisons spock
-    - eats paper
-    spock:
-    - smashes scissors
-    - vaporizes rock
-    */
- var messages = {
+let playerScore = 0;
+let computerScore = 0;
+
+const playerButtons = document.querySelectorAll('button');
+
+const messages = {
     "rock":{
         "lizzard": "Rock crushes lizzard.",
-        "scissor": "Rock crushes scissors"
+        "scissors": "Rock crushes scissors"
     },
     "paper":{
         "rock": "Paper covers rock.",
@@ -54,30 +32,9 @@
  * @return {string}      computer's choice
  */
 function computerPlay () {
-    var pick = Math.floor((Math.random() * 5) + 1) - 1;
+    let pick = Math.floor((Math.random() * 5) + 1) - 1;
     const choices = ["rock", "paper", "scissors", "lizzard", "spock"];
     return choices[pick];
-}
-
-/**
- * Plays a single round between player and computer.
- * @param  {String} playerSelection   player's choice
- * @param  {String} computerSelection computer's choice
- * @return {String}                   result of the round
- */
-function playRound(playerSelection, computerSelection){
-    var playerPick = playerSelection.toLowerCase();
-    console.log(playerPick);
-    console.log(computerSelection);
-    var message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
-    if (computerSelection in messages[playerPick]){ // player wins
-        message += winningMessage(playerPick, computerSelection) + " " + "You Win!";
-    } else if (playerPick == computerSelection){ // draw
-        message += "Draw!";
-    } else { //computer wins
-        message += winningMessage(computerSelection, playerPick) + " " + "Better Luck Next Time!";
-    }
-    return message;
 }
 
 /**
@@ -86,22 +43,73 @@ function playRound(playerSelection, computerSelection){
  * @param  {String} losePick loser's pick
  * @return {String}          result message
  */
-function winningMessage (winPick, losePick){
+ function winningMessage (winPick, losePick){
     return messages[winPick][losePick];
 }
 
 /**
- * Plays total_rounds rounds between player and computer. 
- * @param  {Number} total_rounds number of rounds playable
- * @return {String}              result of the each round
+ * Plays a single round between player and computer.
+ * @param  {String} playerSelection   player's choice
+ * @return {String}                   result of the round
  */
+function playRound(playerSelection) {
+    let playerPick = playerSelection;
+    let computerSelection = computerPlay();
+    let message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ". ";
 
-function game(total_rounds) {
-    for (let i = 0; i < total_rounds; i++) {
-        let playerPick = prompt("What do you pick?"); //Take care of when it's null
-        console.log(playRound(playerPick,computerPlay()));
+    if (computerSelection in messages[playerPick]) { // player wins
+        playerScore += 1;
+        message += winningMessage(playerPick, computerSelection);
+    } else if (playerPick == computerSelection) { // draw
+        message += "Draw!";
+    } else { //computer wins
+        computerScore += 1;
+        message += winningMessage(computerSelection, playerPick);
+    }
+    return message;
+}
+
+/**
+ * Plays the game between player and computer. Handles specific message depending on score in the the game.
+ * @param  {String} playerSelection   player's choice
+ * @return {String}                   result of current stage in the game
+ */
+function game(playerSelection) {
+    let resultMessage = document.getElementById('result-message');
+    let resultScore = document.getElementById('result-score');
+    let leadScore = Math.max(playerScore, computerScore);
+
+    if (leadScore <= 4){
+        resultMessage.innerHTML = playRound(playerSelection) + "<br>";
+        resultScore.innerHTML = "You: " + playerScore + " Computer: " + computerScore;
+        console.log(computerScore);
+        if (computerScore == 5) {
+            resultMessage.innerHTML += "Computer Wins Muahuahuahua";
+        } else if (playerScore == 5) {
+            resultMessage.innerHTML += "You beat the computer! Congrats!";
+        }
     }
 }
-//let playerGames = prompt("How many rounds do you want to play?");
-//game (playerGames);
-game(5);
+
+/**
+ * Reset's the game score and messages
+ */
+function reset() {
+    let resultMessage = document.getElementById('result-message');
+    let resultScore = document.getElementById('result-score');
+
+    playerScore = 0;
+    computerScore = 0;
+    resultScore.innerHTML = "You: 0 Computer: 0";    
+    resultMessage.innerHTML = "Make Your Choice!";
+}
+
+playerButtons.forEach(button => {
+    if (button.id != "reset"){
+        button.addEventListener('click', () => {game(button.id)});  
+    } else {
+        button.addEventListener('click', reset); 
+    }
+    
+})
+
