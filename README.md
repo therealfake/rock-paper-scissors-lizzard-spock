@@ -1,5 +1,6 @@
 # Rock Paper Scissors Lizzard Spock
-Bored of the normal rock-paper-scissors? Play rock-paper-scissors-lizzard-spock [here](https://therealfake.github.io/rock-paper-scissors-lizzard-spock/)
+Bored of the normal rock-paper-scissors? Play rock-paper-scissors-lizzard-spock [here](https://therealfake.github.io/rock-paper-scissors-lizzard-spock/) (CSS still in progress)
+
 Here's a funny [clip](https://www.youtube.com/watch?v=x5Q6-wMx-K8&t=4s) from the show Big Bang Theory 
 
 ### Next Steps:
