@@ -1,14 +1,4 @@
 "use strict";
-/**
- * TODO: Make sure the type for total_rounds is correct => ints in javascript?
- * -  Finish helper function for custom winning message based on result.
- *    Can do like rock beats scissors, but for win or lose you append You Win! or Too Bad in front of helper's return value
- * -  write tests
- * - implement error checking, but may not need because future GUI will input the players choice by user clicking on image representing their pick.
- * Potential Additional Features:
- * -  Different messages for winning or losing.
- * -  Let user input desired rounds
- */
 let playerScore = 0;
 let computerScore = 0;
 
@@ -62,15 +52,15 @@ function computerPlay () {
  * @param  {String} playerSelection   player's choice
  * @return {String}                   result of the round
  */
-function playRound(playerSelection){
+function playRound(playerSelection) {
     let playerPick = playerSelection;
     let computerSelection = computerPlay();
-    let message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".\n";
+    let message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ". ";
 
-    if (computerSelection in messages[playerPick]){ // player wins
+    if (computerSelection in messages[playerPick]) { // player wins
         playerScore += 1;
         message += winningMessage(playerPick, computerSelection);
-    } else if (playerPick == computerSelection){ // draw
+    } else if (playerPick == computerSelection) { // draw
         message += "Draw!";
     } else { //computer wins
         computerScore += 1;
@@ -85,31 +75,40 @@ function playRound(playerSelection){
  * @return {String}                   result of current stage in the game
  */
 function game(playerSelection) {
-    if (Math.max(playerScore, computerScore) <= 4){
-        let resultScore = document.getElementById('result-score');
+    let resultMessage = document.getElementById('result-message');
+    let resultScore = document.getElementById('result-score');
+    let leadScore = Math.max(playerScore, computerScore);
 
-        console.log(playRound(playerSelection));
+    if (leadScore <= 4){
+        resultMessage.innerHTML = playRound(playerSelection) + "<br>";
         resultScore.innerHTML = "You: " + playerScore + " Computer: " + computerScore;
-    } else {
-        let resultMessage = document.getElementById('result-message');
-
+        console.log(computerScore);
         if (computerScore == 5) {
-            resultMessage.innerHTML = "Computer Wins Muahuahuahua";
-        } else {
-            resultMessage.innerHTML = "You beat the computer! Congrats!";
+            resultMessage.innerHTML += "Computer Wins Muahuahuahua";
+        } else if (playerScore == 5) {
+            resultMessage.innerHTML += "You beat the computer! Congrats!";
         }
     }
-    console.log(playerScore,computerScore);
+}
+
+/**
+ * Reset's the game score and messages
+ */
+function reset() {
+    let resultMessage = document.getElementById('result-message');
+    let resultScore = document.getElementById('result-score');
+
+    playerScore = 0;
+    computerScore = 0;
+    resultScore.innerHTML = "You: 0 Computer: 0";    
+    resultMessage.innerHTML = "Make Your Choice!";
 }
 
 playerButtons.forEach(button => {
     if (button.id != "reset"){
         button.addEventListener('click', () => {game(button.id)});  
     } else {
-        button.addEventListener('click', () => {
-            playerScore = 0;
-            computerScore = 0;
-        }); 
+        button.addEventListener('click', reset); 
     }
     
 })
