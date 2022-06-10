@@ -56,8 +56,10 @@ button > img {
 
 #reset-btn {
     width: 150px;
+    height: 40px;
     justify-self: center;
     border: none;
     border-radius: 15px;
     background-color: rgba(35, 144, 240, 0.664);
+    font-weight: bold;
 }
