@@ -1,0 +1,28 @@
+:root {
+    --header-background: rgba(99, 148, 192, 0.664);
+    --header-shadow: rgb(112, 109, 109);
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.body {
+
+}
+
+.header {
+    padding: 20px 30px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: var(--header-background);
+    box-shadow: 0px 5px 10px var(--header-shadow);
+}   
+
+.main-content {
+    margin-top: 50px;
+    text-align: center;
+    display: grid;
+}
