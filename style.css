@@ -37,7 +37,14 @@ body {
 #player-options > button {
     background-color: transparent;
     border: none;
+    padding: 20px;
 }
+
+#player-options > button :hover {
+    background-color: var(--header-background);
+    border-radius: 10px;
+}
+
 button > img {
     width: 150px;
 }
