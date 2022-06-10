@@ -9,18 +9,32 @@
     <script src="app.js" defer></script>
 </head>
 <body>
-    <h1>Play Rock-Paper-Scissors-Lizzard-Spock! (First to 5 Wins)</h1>
-    <div id="player-options">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
-        <button id="lizzard">Lizzard</button>
-        <button id="spock">Spock</button>
+    <div class="header">
+        <div>Play Rock-Paper-Scissors-Lizzard-Spock! (First to 5 Wins)</div>
     </div>
-    <div id="result">
-        <div id="result-message">Make Your Choice!</div>
-        <div id="result-score">You: 0 Computer: 0</div>
+    <div class="main-content">
+        <div id="player-options">
+            <button id="rock">
+                <img src="./images/rock.png" alt="Rock">
+            </button>
+            <button id="paper">
+                <img src="./images/paper.png" alt="Paper">
+            </button>
+            <button id="scissors">
+                <img src="./images/scissors.png" alt="Scissors">
+            </button>
+            <button id="lizzard">
+                <img src="./images/lizzard.png" alt="Lizzard">
+            </button>
+            <button id="spock">
+                <img src="./images/spock.png" alt="Spock">
+            </button>
+        </div>
+        <div id="result">
+            <div id="result-message">Make Your Choice!</div>
+            <div id="result-score">You: 0 Computer: 0</div>
+        </div>
+        <button id="reset-btn">Play Again</button>
     </div>
-    <button id="reset">Play Again</button>
 </body>
 </html>

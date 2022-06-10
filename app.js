@@ -105,7 +105,7 @@ function reset() {
 }
 
 playerButtons.forEach(button => {
-    if (button.id != "reset"){
+    if (button.id != "reset-btn"){
         button.addEventListener('click', () => {game(button.id)});  
     } else {
         button.addEventListener('click', reset); 
