@@ -55,7 +55,7 @@ function computerPlay () {
 function playRound(playerSelection) {
     let playerPick = playerSelection;
     let computerSelection = computerPlay();
-    let message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ". ";
+    let message = "You chose: " + playerPick + ". The computer chose: " + computerSelection + ".<br> ";
 
     if (computerSelection in messages[playerPick]) { // player wins
         playerScore += 1;
@@ -82,7 +82,6 @@ function game(playerSelection) {
     if (leadScore <= 4){
         resultMessage.innerHTML = playRound(playerSelection) + "<br>";
         resultScore.innerHTML = "You: " + playerScore + " Computer: " + computerScore;
-        console.log(computerScore);
         if (computerScore == 5) {
             resultMessage.innerHTML += "Computer Wins Muahuahuahua";
         } else if (playerScore == 5) {
@@ -101,7 +100,7 @@ function reset() {
     playerScore = 0;
     computerScore = 0;
     resultScore.innerHTML = "You: 0 Computer: 0";    
-    resultMessage.innerHTML = "Make Your Choice!";
+    resultMessage.innerHTML = "Make Your Choice! (First to 5)";
 }
 
 playerButtons.forEach(button => {
