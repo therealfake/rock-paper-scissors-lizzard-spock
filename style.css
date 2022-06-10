@@ -1,5 +1,6 @@
 :root {
-    --header-background: rgba(99, 148, 192, 0.664);
+    --header-background: rgba(35, 144, 240, 0.664);
+    --main-content-background: rgba(81, 144, 199, 0.664);
     --header-shadow: rgb(112, 109, 109);
 }
 
@@ -8,8 +9,8 @@
     box-sizing: border-box;
 }
 
-.body {
-
+body {
+    background-color: var(--main-content-background);
 }
 
 .header {
@@ -22,7 +23,34 @@
 }   
 
 .main-content {
-    margin-top: 50px;
+    display: flex;
+    height: calc();
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 250px;
     text-align: center;
-    display: grid;
+    gap: 2rem;
+    
+}
+
+#player-options > button {
+    background-color: transparent;
+    border: none;
+}
+button > img {
+    width: 150px;
+}
+
+#result {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#reset-btn {
+    width: 150px;
+    justify-self: center;
+    border: none;
+    border-radius: 15px;
+    background-color: rgba(35, 144, 240, 0.664);
 }
